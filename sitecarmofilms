@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carmo Films</title>
+    <!-- Favicon -->
+    <link rel="icon" href="img/FAVICON.png" type="image/x-icon">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  
+    <!-- CSS Externo -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+
+        /* Fontes Personalizadas */
+        @font-face {
+            font-family: Violacarmo;
+            src: url(fonts/VIOLA.otf);
+        }
+
+/* Ajustes para telas menores */
+@media (max-width: 800px) {
+
+
+    .logo-fixa {
+        max-width: 150px;
+    }
+    .navbar .navbar-links {
+                display: none;
+            }
+            .navbar.fixed .menu-icon {
+        color: black; /* Muda a cor do ícone para preto */
+        position: absolute;
+        top: 50%; /* Posiciona o ícone no meio verticalmente */
+        transform: translateY(-50%); /* Centraliza verticalmente */
+        right: 15px; /* Ajusta a distância da borda direita */
+    }
+
+    .logo-menu{
+margin-top: 15px;
+
+    }
+
+       /* Altera o tamanho do logo quando o menu está fixo no mobile */
+       .navbar.fixed .logo-menu img {
+        width: 150px; /* Ajuste este valor para o tamanho desejado */
+        height: auto;
+    }
+            .menu-icon {
+                display: inline-block;
+                font-size: 24px;
+                cursor: pointer;
+                color: white;
+                margin-top: 20px;
+            }
+
+            .navbar.fixed {
+                height: 80px;
+            }
+
+            .side-menu {
+                position: fixed;
+                top: 0;
+                right: -250px;
+                width: 250px;
+                height: 100%;
+                background-color: #333;
+                transition: right 0.8s ease;
+                z-index: 2000;
+                padding-top: 60px;
+                color: white;
+                overflow-y: auto;
+            }
+
+            .side-menu a {
+                display: block;
+                padding: 15px;
+                color: white;
+                text-decoration: none;
+                font-size: 18px;
+            }
+
+            .side-menu a:hover {
+                background-color: orange;
+            }
+
+            .side-menu.open {
+                right: 0;
+            }
+
+            /* Estilos do botão de fechar */
+            .close-btn {
+                position: absolute;
+                top: 15px;
+                right: 15px;
+                font-size: 24px;
+                color: white;
+                background: none;
+                border: none;
+                cursor: pointer;
+            }
+
+
+            /* Ajustes para o footer mobile */
+    footer .row {
+        flex-direction: column; /* Alinha os itens do footer verticalmente */
+        text-align: center; /* Centraliza o texto */
+    }
+
+    footer .col-2 {
+        width: 100%; /* Cada coluna ocupa 100% da largura */
+        margin-bottom: 20px; /* Espaçamento entre as colunas */
+    }
+
+    footer .footer-title, footer .footer-subtitle {
+        font-size: 14px; /* Ajusta o tamanho da fonte no footer */
+    }
+
+/* Sobre carmofilms index MOBILE*/
+
+    .info-image{
+        max-width: 300px;
+    }
+    .text-container{
+        max-width: 100%;
+        text-align: center;
+    }
+    .info-section {
+        flex-direction: column; /* Muda a direção para coluna em telas menores */
+        align-items: flex-start; /* Alinha itens à esquerda */
+    }
+
+    .image-container {
+        margin-right: 0; /* Remove a margem da direita */
+        margin-bottom: 20px; /* Adiciona espaço abaixo da imagem */
+    }
+
+
+        /* last production */
+    .production-content {
+        flex-direction: column; /* Alinha as colunas verticalmente */
+        align-items: center; /* Centraliza horizontalmente */
+    }
+
+    .left-column, .right-column {
+        width: 100%; /* Faz as colunas ocuparem 100% da largura */
+        text-align: center; /* Centraliza o texto */
+    }
+    
+    /* services */
+
+    .service-card {
+        width: 100%; /* Quadros ocupam 100% em telas menores */
+        max-width: none;
+        padding: 10px;
+    }
+
+
+}
+.service-card p {
+    font-size: 2vw;
+    
+}
+
+
+
+/* Oculta o menu lateral e o botão de fechar em telas maiores */
+@media (min-width: 801px) {
+    .side-menu {
+        display: none !important;
+        overflow-x: auto;
+     
+    }
+    .close-btn {
+        display: none !important;
+    }
+}
+
+* {
+    outline: 1px solid red; /* Adiciona um contorno vermelho em todos os elementos */
+}
+        /* Estilos do Body */
+        body {
+            overflow-x: hidden;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh; /* Faz com que o body ocupe toda a altura da viewport */
+            background: linear-gradient(to bottom, 
+                rgba(0, 0, 0, 1) 0%, /* Preto no topo */
+                rgba(12, 10, 23, 0.9) 50%, /* Cinza até 100% da altura */
+                rgba(0, 0, 0, 1) 100% /* Preto até 50% da altura */)
+    
+        }
+
+        /* Header */
+        .header {
+            
+            height: auto;
+            max-width: 100%;
+            display: block;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Logo */
+        .logo-container {
+            position: relative;
+            display: inline-block;
+            margin: 0 auto;
+        }
+
+        .logo-fixa {
+            max-width: 400px;
+            height: auto;
+        }
+
+        .imagem-movivel {
+            width: 100%;
+            height: 100%;
+            max-height: 300px;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: transform 0.9s ease;
+        }
+
+/* Estilos do menu */
+.navbar {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    overflow: hidden; /* Oculta qualquer conteúdo extra que ultrapasse */
+    max-width: 100%;
+    display: flex;
+    justify-content: center; /* Alinha os itens no centro */
+    align-items: center; /* Alinha verticalmente */
+    background-color: black;
+    padding: 15px 0; /* Adiciona espaço em cima e embaixo do menu */
+    position: relative; /* Para que a posição fixa funcione */
+    transition: background-color 1.2s, height 0.3s; /* Transição suave para cor e altura */
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    padding: 15px 30px; /* Aumenta o espaçamento lateral dos links */
+    transition: color 0.3s; /* Transição suave para a cor do texto */
+}
+
+.navbar a:hover {
+    color: orange; /* Cor ao passar o mouse */
+}
+
+/* Menu fixo */
+.fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: white; /* Cor de fundo do menu fixo */
+    color: black; /* Cor do texto no menu fixo */
+    height: 70px; /* Altura do menu fixo */
+    z-index: 1000; /* Garante que o menu fique acima de outros elementos */
+}
+
+/* Exibe o logo apenas no menu fixo */
+.fixed .logo-menu {
+    display: inline-block; /* Mostra o logo */
+    margin-right: 20px; /* Espaço entre o logo e o primeiro link */
+}
+
+   /* Altera o tamanho do logo quando o menu está fixo no mobile */
+   .navbar.fixed .logo-menu img {
+        width: 70px; /* Ajuste este valor para o tamanho desejado */
+        height: auto;
+    }
+
+/* Oculta o logo quando o menu não está fixo */
+.logo-menu {
+    display: none; /* Oculta o logo */
+}
+
+/* Muda a cor dos links quando fixo */
+.fixed a {
+    color: black; /* Cor do texto quando fixo */
+}
+
+        /* Carrossel */
+        .carousel {
+    z-index: 1; /* Define um z-index menor para que o carrossel fique abaixo do menu */
+}
+
+        .carousel-item {
+            transition: transform 3s ease;
+        }
+
+        .carousel-item video {
+    max-width: 100vw; /* Evita que o vídeo ultrapasse a largura da tela */
+    width: 100%; /* Configura para sempre ocupar a largura total */
+    object-fit: cover;
+}
+
+        .carousel-item-next,
+        .carousel-item-prev {
+            position: relative;
+        }
+
+        .carousel-item-next {
+            transform: translateX(100%);
+        }
+
+        .carousel-item-prev {
+            transform: translateX(-100%);
+            background-color: orange;
+        }
+
+        .carousel-item-next.carousel-item-start,
+        .carousel-item-prev.carousel-item-end {
+            transform: translateX(0);
+        }
+
+        .carousel-item-prev.carousel-item-start {
+            transform: translateX(-100%);
+        }
+
+        .titulobanner {
+            font-family: Violacarmo;
+            color: #fff;
+        }
+        
+        .carousel-item img {
+            transition: transform 10s ease-in;
+            width: 100%;
+            height: auto;
+            max-height: 450px;
+            object-fit: cover;
+        }
+
+       .carousel-caption p{
+            color: orange;
+
+
+       }
+
+/* Sobre carmofilms index */
+
+       .info-section {
+    display: flex;
+    align-items: center; /* Alinha verticalmente */
+    justify-content: space-between; /* Espaçamento entre imagem e texto */
+    margin: 100px px; /* Espaçamento acima e abaixo */
+   
+}
+
+.image-container {
+    flex: 0 0 auto; /* Não permite que a imagem cresça */
+}
+
+.info-image img {
+    width: 100%;
+    height: auto;
+
+}
+
+
+.info-image {
+    flex: 1;
+    width: 600px; /* Ajuste o tamanho conforme necessário */
+    height: auto;
+    border-radius: 15px; /* Arredondamento das bordas */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Sombra projetada */
+}
+
+.text-container {
+    flex: 2; /* Permite que o texto ocupe o espaço restante */
+    margin-left: 50px; /* Espaçamento entre imagem e texto */
+    margin-right: 50px; /* Espaçamento entre imagem e texto */
+}
+
+.text-container h2 {
+    margin: 0; /* Remove margem padrão */
+    font-size: 30px; /* Tamanho da fonte do título */
+    font-family: Violacarmo;
+    color: #fff;
+}
+
+.text-container p {
+    font-size: 16px; /* Tamanho da fonte do texto */
+    margin: 10px 0; /* Espaçamento acima e abaixo do texto */
+    color: #fff;
+}
+
+.saiba-mais-link {
+    display: inline-block; /* Faz com que o link tenha comportamento de bloco */
+    margin-top: 10px; /* Espaçamento acima do link */
+    text-decoration: none; /* Remove o sublinhado */
+    color: orange; /* Cor do texto do link */
+    font-weight: bold; /* Deixa o texto do link em negrito */
+}
+
+.saiba-mais-link:hover {
+    scale: 1.1;
+    transition: 1s ease;
+}
+
+
+.latest-production {
+    padding: 40px;
+    
+    color: white; /* Cor do texto */
+    text-align: center;
+}
+
+.latest-production h2 {
+    text-transform: uppercase;
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    color: orange;
+    letter-spacing: 2px;
+}
+.latest-production h5{
+    font-weight: bold;
+    text-transform: uppercase;
+    color: orange;
+
+}
+
+.production-content {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px; /* Espaçamento entre as colunas */
+}
+
+.left-column {
+    flex: 1; /* Faz a coluna ocupar o espaço disponível */
+    text-align: left; /* Alinha o texto à esquerda */
+}
+
+.right-column {
+    flex: 2; /* Faz a coluna ocupar o espaço disponível */
+    border-radius: 10px; /* Borda arredondada */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Sombra */
+    overflow: hidden; /* Para esconder os cantos arredondados */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.right-column iframe {
+    width: 100%; /* Faz o vídeo ocupar toda a largura da coluna */
+    height: auto; /* Altura do vídeo */
+    aspect-ratio: 22/9;
+    border: none; /* Remove borda do iframe */
+}
+
+
+
+/* Estilização da seção principal */
+.services-section {
+        text-align: center;
+    padding: 40px;
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo preto com 50% de opacidade */
+}
+
+.services-section h2 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    color: orange;
+    letter-spacing: 2px;
+}
+
+/* Estilização dos quadros de serviços */
+.service-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    transition: 1s ease;
+}
+
+.service-card {
+    transition: 1s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: calc(50% - 20px); /* Dois quadros por linha */
+    max-width: 200px;
+    height: 150px;
+    border: 2px solid orange;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    transition: background-color 0.5s;
+    cursor: pointer; /* Muda o cursor para pointer ao passar o mouse */
+    
+}
+
+.service-card img {
+    width: 50px; /* Tamanho das imagens dentro dos quadros */
+    height: 50px;
+    margin-bottom: 10px;
+    border-radius: 50%; /* Torna a imagem redonda */
+}
+
+.service-card p {
+    font-size: 14px;
+    text-transform: uppercase;
+    font-family: Violacarmo;
+    color: #fff;
+    margin: 0;
+}
+
+/* Efeito de hover */
+.service-card:hover {
+    background-color: #ff8c00; /* Cor laranja no hover */
+    color: #fff;
+    border-color: #ff8c00; /* Muda a cor da borda no hover */
+    scale: 1.1;
+    transition: 0.3s ease-out;
+}
+
+.service-card:hover p {
+    color: #fff; /* Muda a cor do texto para branco no hover */
+}
+
+        /* Footer */
+
+
+        .footerorcamento {
+    position: relative; /* Necessário para o posicionamento absoluto da imagem */
+}
+
+.footerorcamento {
+    position: relative; /* Necessário para o posicionamento absoluto da imagem */
+}
+
+.hover-image {
+    max-width: 50px;
+    opacity: 0; /* Inicialmente invisível */
+    position: absolute; /* Permite que a imagem se mova livremente */
+    left: 50%; /* Centraliza horizontalmente em relação ao botão */
+    transform: translateX(-50%); /* Corrige o alinhamento para o centro */
+    bottom: 100%; /* Coloca a imagem acima do botão */
+    margin-bottom: -10px; /* Espaço entre a imagem e o botão */
+    transition: opacity 0.8s ease, transform 0.8s ease; /* Suaviza a animação */
+}
+
+.footerorcamento a:hover .hover-image {
+    opacity: 1; /* Torna a imagem visível ao passar o mouse */
+    transform: translateX(-50%) translateY(-10px); /* Move a imagem ligeiramente para cima */
+}
+
+.footerorcamento button{
+            font-weight: bold;
+            transition: 1s ease;
+}
+        .footerorcamento button:hover{
+            scale: 1.1;
+            transition: 1s ease;
+
+        }
+
+        .footer-logo {
+            max-width: 100%;
+            height: auto;
+        }
+
+        footer h5, footer h6 {
+            margin: 0;
+        }
+
+        footer .container {
+            max-width: 1000px;
+        }
+
+        .footer-subtitle {
+            color: white;
+            font-size: 0.9em;
+        }
+
+        .footer-title {
+            margin-bottom: 45px;
+            color: orange;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .footerorcamento {
+            margin-bottom: 75px;
+            margin-top: 35px;
+        }
+
+        .footer .h6 {
+            font-size: 36px;
+        }
+
+        footer .row {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        margin: 0 -10px;
+    }
+
+    footer .col-2 {
+        flex:1;
+    }
+
+        .social-icons {
+    display: flex; /* Usa flexbox para alocar as imagens lado a lado */
+    justify-content: center; /* Centraliza as imagens no container */
+    margin-top: 10px; /* Espaçamento acima das imagens */
+}
+
+.social-icon {
+    width: 40px; /* Largura das imagens, ajuste conforme necessário */
+    height: auto; /* Mantém a proporção da imagem */
+    margin: 0 10px; /* Espaçamento entre as imagens */
+    transition: transform 0.3s; /* Adiciona uma transição suave */
+}
+
+.social-icon:hover {
+    transform: scale(1.1); /* Aumenta a imagem ao passar o mouse */
+}
+/* Estilos para o botão flutuante do WhatsApp */
+.whatsapp-float {
+    background-color: ;
+    position: fixed;
+    bottom: 20px; /* Distância da parte inferior da tela */
+    right: 20px; /* Distância do lado direito da tela */
+    z-index: 1000; /* Garante que o ícone fique acima de outros elementos */
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.1); /* Aumenta ligeiramente ao passar o mouse */
+}
+
+.whatsapp-icon {
+    width: 60px; /* Tamanho do ícone */
+    height: auto;
+}
+    </style>
+</head>
+
+<body>
+  
+    <header class="header"> 
+    <!-- LOGO CARMOFILMS -->
+    <a href="https://carmofilms.com.br"> <div class="logo-container"></a>
+            <img src="img/LOGO02.webp" alt="Parte Fixa do Logo" class="logo-fixa">
+            <img id="pupila" src="img/pupila01.webp" alt="Imagem em Movimento" class="imagem-movivel">
+        </div>
+    </header>
+    <nav class="navbar">
+        <a href="https://carmofilms.com.br" class="logo-menu"><img src="img/LOGO01.webp" alt="Logo"></a>
+        <span class="menu-icon" onclick="toggleMenu()">&#9776;</span>
+        <div class="navbar-links">
+            <a href="#home">Home</a>
+            <a href="#portfolio">Portfólio</a>
+            <a href="#servicos">Serviços</a>
+            <a href="#contato">Contato</a>
+            <a href="#sobre">Sobre</a>
+        </div>
+    </nav>
+
+    <!-- Menu lateral (oculto inicialmente) -->
+    <div class="side-menu" id="sideMenu">
+        <button class="close-btn" onclick="toggleMenu()">&#10005;</button> <!-- Botão de fechar -->
+        <a href="#home" onclick="closeMenu()">Home</a>
+        <a href="#portfolio" onclick="closeMenu()">Portfólio</a>
+        <a href="#servicos" onclick="closeMenu()">Serviços</a>
+        <a href="#contato" onclick="closeMenu()">Contato</a>
+        <a href="#sobre" onclick="closeMenu()">Sobre</a>
+    </div>
+    
+    <!-- CARROSSEL CARMOFILMS -->
+    <div id="carouselExampleCaptions" class="carousel slide" data-interval="600" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-label="Slide 4"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <video class="d-block w-100" autoplay muted loop>
+                    <source src="img/BANNERWEDDINGVIDEO.mp4" type="video/mp4">
+                    Seu navegador não suporta vídeos.
+                </video>
+                <div class="carousel-caption d-block">
+                    <h1 class="titulobanner">WEDDING</h1>
+                    <p>Seu dia especial capturado por nossas lentes!</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <video class="d-block w-100" autoplay muted loop>
+                    <source src="img/BANNEREVENTOVIDEO.mp4" type="video/mp4">
+                    Seu navegador não suporta vídeos.
+                </video>
+                <div class="carousel-caption d-block">
+                    <h1 class="titulobanner">Eventos</h1>
+                    <p>Cada sorriso, emoção e momento eternizados</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <video class="d-block w-100" autoplay muted loop>
+                    <source src="img/BANNERCLIPEVIDEO.mp4" type="video/mp4">
+                    Seu navegador não suporta vídeos.
+                </video>
+                <div class="carousel-caption d-block">
+                    <h1 class="titulobanner">CLIPES</h1>
+                    <p>Seu projeto musical visualmente expressado</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <video class="d-block w-100" autoplay muted loop>
+                    <source src="img/BANNERINSTIVIDEO.mp4" type="video/mp4">
+                    Seu navegador não suporta vídeos.
+                </video>
+                <div class="carousel-caption d-block">
+                    <h1 class="titulobanner">Institucionais</h1>
+                    <p>Seu legado empresarial expressado em uma produção audiovisual</p>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+    <div class="info-section">
+        <div class="image-container">
+            <img src="img/imagemsobrenosindex.webp" alt="Imagem do Carmo Films" class="info-image">
+        </div>
+        <div class="text-container">
+            <h2>Carmo Films</h2>
+            <p>A Carmo Films é uma produtura audiovisual independente que oferece serviços desde um vídeo para sua mídia social, até o casamento de seus sonhos. ao longo de nossa jornada, produzimos casamentos, cobrimos eventos, vídeos institucionais e até clipes musicais.</p>
+            <a href="sobre.html" class="saiba-mais-link">SAIBA MAIS</a>
+        </div>
+    </div>
+    <section class="latest-production">
+        <div class="container">
+            <h2>Confira nossa última produção</h2>
+            <div class="production-content">
+                <div class="left-column">
+                    <h5>REAHUMOU</h5>
+                    <h6>Bendito Coletivo</h6>
+                    <p>Bendito coletivo, é um grupo musical da cidade de Petrópolis, que em 2024 produziu de forma 100% analógica no estúdio ForestLab um ep com quatro músicas, alusivas aos povos indígenas brasileiros e sua trajetória até os dias de hoje. a Carmo Films produziu 100% do material visual. </p>
+                </div>
+                <div class="right-column">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/5zDI-FHMHg0?si=enNln2D-6xz8BLoe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <div class="services-section">
+        <h2>O QUE PODEMOS FAZER PRA VOCÊ?</h2>
+        <div class="service-cards">
+            <div class="service-card">
+                <img src="img/weddingicon.png" alt="Wedding">
+                <p>Wedding</p>
+            </div>
+            <div class="service-card">
+                <img src="img/clipeicon.png" alt="Clipes">
+                <p>Clipes</p>
+            </div>
+            <div class="service-card">
+                <img src="img/eventoicon.png" alt="Eventos">
+                <p>Eventos</p>
+            </div>
+            <div class="service-card">
+                <img src="img/institucionalicon.png" alt="Institucionais">
+                <p>Institucionais</p>
+            </div>
+            <div class="service-card">
+                <img src="img/droneicon.png" alt="Drones">
+                <p>Imagem Aerea</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- RODAPE -->
+    <footer class="bg-secondary text-white text-center py-4">
+        <div class="container" >
+            <div class="footerorcamento">
+                <a href="https://wa.me/5524993059797" target="_blank" rel="noopener noreferrer">
+                    <button type="button" class="btn btn-warning">E AÍ, BORA GRAVAR?</button>
+                    <img src="img/clipeicon.png" alt="Imagem" class="hover-image">
+                </a>
+            </div>
+            
+            </div>
+            <hr class="my-4 bg-white" />
+            <div class="row justify-content-center">
+                <div class="col-2 text-center">
+                    <a href="https://carmofilms.com.br"><img src="img/LOGO01.webp" alt="Logo" class="footer-logo" style="width: 180px; height: auto;"></a>
+                </div>
+                <div class="col-2 text-center">
+                    <h6 class="footer-title">Equipamentos</h6>
+                    <p class="footer-subtitle">Conheça nosso equipamento</p>
+                </div>
+                <div class="col-2 text-center">
+                    <h6 class="footer-title">Sobre</h6>
+                    <p class="footer-subtitle">Nosso trabalho</p>
+                    <p class="footer-subtitle">Nossos ideais</p>
+                </div>
+                <div class="col-2 text-center">
+                    <h6 class="footer-title">ACOMPANHE</h6>
+                    <div class="social-icons">
+                        <a href="https://linkparaInstagram" target="_blank" rel="noopener noreferrer">
+                            <img src="img/INSTALOGO.webp" alt="Instagram" class="social-icon">
+                        </a>
+                        <a href="https://linkparaFacebook" target="_blank" rel="noopener noreferrer">
+                            <img src="img/YOUTUBELOGO.webp" alt="Facebook" class="social-icon">
+                        </a>
+                        <a href="https://linkparaTwitter" target="_blank" rel="noopener noreferrer">
+                            <img src="img/TIKTOKLOGO.webp" alt="Twitter" class="social-icon">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/5524993059797" target="_blank" class="whatsapp-float">
+        <img src="img/WPPLOGO.webp" alt="WhatsApp" class="whatsapp-icon">
+    </a>
+    <!-- SCRIPTS -->
+
+<!-- Bootstrap JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-..." crossorigin="anonymous"></script>
+
+    <!-- Firebase App (núcleo do SDK) -->
+<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+
+    <!-- Firebase Storage -->
+<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-storage.js"></script>
+
+    <!-- Movimento logo Script -->
+<script>
+  document.addEventListener('mousemove', function(event) {
+      const pupila = document.getElementById('pupila');
+      const logoContainer = document.querySelector('.logo-container');
+
+      // Obter as dimensões do contêiner
+      const containerRect = logoContainer.getBoundingClientRect();
+
+      // Calcular a posição da pupila
+      const pupilaX = event.clientX - containerRect.left - (pupila.offsetWidth / 2);
+      const pupilaY = event.clientY - containerRect.top - (pupila.offsetHeight / 2);
+
+      // Limitar o movimento a no máximo 10 pixels para os lados e 20 pixels para baixo
+      const maxMovementX = 12; // Lateral
+      const maxMovementY = 15; // Para baixo
+      const offsetX = Math.max(-maxMovementX, Math.min(maxMovementX, pupilaX));
+      const offsetY = Math.max(0, Math.min(maxMovementY, pupilaY)); // Impede o movimento para cima
+
+      // Definir a nova posição da pupila
+      pupila.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+  });
+</script>
+
+<script>
+    window.addEventListener('scroll', function() {
+        const navbar = document.querySelector('.navbar');
+        const scrollPosition = window.scrollY;
+
+        console.log(scrollPosition); // Para depuração
+
+        if (scrollPosition > 50) { // Quando o usuário rolar mais de 50 pixels
+            navbar.classList.add('fixed'); // Adiciona a classe fixed
+        } else {
+            navbar.classList.remove('fixed'); // Remove a classe fixed
+        }
+    });
+</script>
+
+<script>
+    // Função para abrir/fechar o menu lateral
+    function toggleMenu() {
+            const sideMenu = document.getElementById('sideMenu');
+            sideMenu.classList.toggle('open');
+        }
+
+        // Função para fechar o menu ao clicar no link
+        function closeMenu() {
+            const sideMenu = document.getElementById('sideMenu');
+            sideMenu.classList.remove('open');
+    }
+
+    // Exibir o menu fixo ao rolar a página
+    window.addEventListener('scroll', function() {
+        const navbar = document.querySelector('.navbar');
+        const scrollPosition = window.scrollY;
+
+        if (scrollPosition > 50) {
+            navbar.classList.add('fixed'); // Adiciona a classe fixed
+        } else {
+            navbar.classList.remove('fixed'); // Remove a classe fixed
+        }
+    });
+</script>
+
+
+
+</body>
+</html>
